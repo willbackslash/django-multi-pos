@@ -8,6 +8,8 @@ authors = ["William De la Cruz <macwilliamdlc@gmail.com>"]
 python = "^3.8"
 django = "^3.1"
 djangorestframework = "^3.11.1"
+uritemplate = "^3.0.1"
+pyyaml = "^5.3.1"
 
 [tool.poetry.dev-dependencies]
 

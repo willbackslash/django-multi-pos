@@ -14,8 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import SimpleRouter
+from rest_framework.schemas import get_schema_view
+
+from branches.viewsets.company_viewset import CompanyViewSet
+
+router = SimpleRouter(trailing_slash=False)
+router.register("companies", CompanyViewSet, basename="companies")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/", include(router.urls)),
+    path('openapi', get_schema_view(
+        title="Your Project",
+        description="API for multipos"
+    ), name='openapi-schema'),
 ]
