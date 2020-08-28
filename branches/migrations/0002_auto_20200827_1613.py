@@ -7,30 +7,44 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('branches', '0001_initial'),
+        ("branches", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='company',
-            options={'verbose_name_plural': 'Companies'},
+            name="company",
+            options={"verbose_name_plural": "Companies"},
         ),
         migrations.AlterModelTable(
-            name='company',
-            table='companies',
+            name="company",
+            table="companies",
         ),
         migrations.CreateModel(
-            name='Branch',
+            name="Branch",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=255)),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='branches.company')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=255)),
+                (
+                    "company",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="branches.company",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Branches',
-                'db_table': 'branches',
+                "verbose_name_plural": "Branches",
+                "db_table": "branches",
             },
         ),
     ]

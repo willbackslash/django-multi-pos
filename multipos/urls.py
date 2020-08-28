@@ -24,10 +24,11 @@ router = SimpleRouter(trailing_slash=False)
 router.register("companies", CompanyViewSet, basename="companies")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
-    path('openapi', get_schema_view(
-        title="Your Project",
-        description="API for multipos"
-    ), name='openapi-schema'),
+    path(
+        "openapi",
+        get_schema_view(title="Your Project", description="API for multipos"),
+        name="openapi-schema",
+    ),
 ]
