@@ -18,10 +18,12 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from rest_framework.schemas import get_schema_view
 
+from branches.viewsets.branch_viewset import BranchViewSet
 from branches.viewsets.company_viewset import CompanyViewSet
 
 router = SimpleRouter(trailing_slash=False)
 router.register("companies", CompanyViewSet, basename="companies")
+router.register("branches", BranchViewSet, basename="branches")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
