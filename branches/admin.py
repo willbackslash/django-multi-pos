@@ -1,5 +1,5 @@
 from django.contrib import admin
-from branches.models import Company, Branch
+from branches.models import Company, Branch, BranchUser
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -12,3 +12,4 @@ class BranchAdmin(admin.ModelAdmin):
 
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Branch, BranchAdmin)
+admin.site.register(BranchUser)

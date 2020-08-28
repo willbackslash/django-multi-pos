@@ -1,5 +1,6 @@
 import uuid
 
+from django.contrib.auth.models import User
 from django.db import models
 
 from multipos.utils.model_mixins import TimeStampedModel
@@ -24,3 +25,12 @@ class Branch(TimeStampedModel, models.Model):
     class Meta:
         db_table = "branches"
         verbose_name_plural = "Branches"
+
+
+class BranchUser(TimeStampedModel, models.Model):
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("branch", "user"),)
+        db_table = "branch_users"
