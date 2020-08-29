@@ -20,8 +20,10 @@ from rest_framework.schemas import get_schema_view
 
 from branches.viewsets.branch_viewset import BranchViewSet
 from branches.viewsets.company_viewset import CompanyViewSet
+from users.viewsets.user_viewset import UserViewSet
 
 router = SimpleRouter(trailing_slash=False)
+router.register("users", UserViewSet, basename="users")
 router.register("companies", CompanyViewSet, basename="companies")
 router.register("branches", BranchViewSet, basename="branches")
 

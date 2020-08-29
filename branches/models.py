@@ -1,9 +1,8 @@
 import uuid
-
-from django.contrib.auth.models import User
 from django.db import models
 
 from multipos.utils.model_mixins import TimeStampedModel
+from users.models import User
 
 
 class Company(TimeStampedModel, models.Model):
@@ -19,6 +18,7 @@ class Company(TimeStampedModel, models.Model):
 
 
 class Branch(TimeStampedModel, models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
 
