@@ -4,13 +4,13 @@ from rest_framework.response import Response
 from branches.models import Branch, BranchUser
 from multipos.utils.user_serializer import UserSerializer, CreateUserSerializer
 from users.models import User
-from users.permissions import UserBelongsToCompany
+from users.permissions import UserCanCreateUsers
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [UserBelongsToCompany]
+    permission_classes = [UserCanCreateUsers]
 
     def create(self, request, *args, **kwargs):
         create_user_serializer = CreateUserSerializer(data=request.data)
