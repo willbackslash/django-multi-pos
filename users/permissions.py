@@ -5,7 +5,7 @@ from branches.models import BranchUser, Branch
 
 class UserCanCreateUsers(BasePermission):
     """
-    Allows access only to customer users with qualified account.
+    Allows user creation only to master users
     """
 
     @staticmethod
