@@ -18,10 +18,18 @@ class UserCanCreateUsers(BasePermission):
             and not "users.can_create_users_for_his_company" in permissions
         )
 
+    @staticmethod
+    def user_can_not_create_account_for_his_branch(
+        requested_branch, user_branch, permissions
+    ):
+        return (
+            requested_branch.id == user_branch.id
+            and not "users.can_create_users_for_his_branch" in permissions
+        )
+
     def has_permission(self, request, view):
         user = request.user
         permissions = request.user.get_all_permissions()
-        print()
         data = request.data
         if bool(user and user.is_authenticated):
             if user.is_staff:
@@ -42,9 +50,8 @@ class UserCanCreateUsers(BasePermission):
         ):
             return False
 
-        if (
-            requested_branch.id == branch_user.branch.id
-            and not "users.can_create_users_for_his_branch" in permissions
+        if self.user_can_not_create_account_for_his_branch(
+            requested_branch, branch_user.branch, permissions
         ):
             return False
 
