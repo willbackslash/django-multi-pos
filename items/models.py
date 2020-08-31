@@ -2,7 +2,7 @@ import uuid
 
 from django.db import models
 
-from branches.models import Company
+from branches.models import Company, Branch
 from multipos.utils.model_mixins import TimeStampedModel
 
 
@@ -13,7 +13,7 @@ class CompanyBrand(TimeStampedModel, models.Model):
 
     class Meta:
         db_table = "company_brands"
-        verbose_name_plural = "company_brands"
+        verbose_name_plural = "Company Brands"
 
 
 class CompanyItem(TimeStampedModel, models.Model):
@@ -32,13 +32,17 @@ class CompanyItem(TimeStampedModel, models.Model):
             models.Index(fields=["category", "subcategory"]),
         ]
         db_table = "company_items"
+        verbose_name_plural = "Company Items"
 
 
-class BranchItemPrice(TimeStampedModel, models.Model):
+class BranchItem(TimeStampedModel, models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    item = models.ForeignKey(CompanyItem, on_delete=models.CASCADE)
     cost = models.DecimalField(max_digits=12, decimal_places=2, null=False)
     price = models.DecimalField(max_digits=12, decimal_places=2, null=False)
+    stock = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    item = models.ForeignKey(CompanyItem, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = "branch_item_prices"
+        db_table = "branch_items"
+        verbose_name_plural = "Branch Items"
