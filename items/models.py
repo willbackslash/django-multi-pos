@@ -31,7 +31,6 @@ class CompanyItem(TimeStampedModel, models.Model):
         indexes = [
             models.Index(fields=["category", "subcategory"]),
         ]
-        unique_together = (("company", "item"),)
         db_table = "company_items"
 
 
