@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_yasg",
     "users",
     "branches",
     "items",
@@ -124,3 +125,15 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 AUTH_USER_MODEL = "users.User"
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
+
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False,
+    "SECURITY_DEFINITIONS": {
+        "Basic": {"type": "basic"},
+        "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+    },
+}
