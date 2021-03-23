@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import re_path
 from django.contrib import admin
 from django.urls import path, include
 from drf_yasg import openapi
@@ -21,19 +21,14 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.routers import SimpleRouter
 
-from branches.viewsets.branch_viewset import BranchViewSet
-from branches.viewsets.company_viewset import CompanyViewSet
-from users.viewsets.user_viewset import UserViewSet
+from webservice.views.user_views import UserViewSet
 
 router = SimpleRouter(trailing_slash=False)
 router.register("users", UserViewSet, basename="users")
-router.register("companies", CompanyViewSet, basename="companies")
-router.register("branches", BranchViewSet, basename="branches")
-
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Hitman API",
+        title="Multi-POS API",
         default_version="v1",
         description="Test description",
         contact=openapi.Contact(email="macwilliamdlc@gmail.com"),
@@ -44,17 +39,17 @@ schema_view = get_schema_view(
 )
 
 swagger_urls = [
-    url(
+    re_path(
         r"^spec(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
         name="schema-json",
     ),
-    url(
+    re_path(
         r"^docs/$",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    url(
+    re_path(
         r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
 ]

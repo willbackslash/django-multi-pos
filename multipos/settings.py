@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
-    "users",
-    "branches",
-    "items",
+    "webservice",
 ]
 
 MIDDLEWARE = [
@@ -124,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "webservice.User"
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = "/static/"
